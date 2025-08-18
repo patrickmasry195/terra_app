@@ -34,7 +34,7 @@ class _ShopScreenState extends State<ShopScreen> {
       children: [
         Row(
           children: [
-            Text(key, style: TextStyle(fontSize: key == "Sort by" ? 18 : 16)),
+            Text(key, style: TextStyle(fontSize: key == "Sort by" ? 16 : 12)),
             InkWell(
               child: Image.asset("assets/images/down-arrow.png", height: 20),
               onTap: () {

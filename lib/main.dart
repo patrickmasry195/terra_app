@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terra_app/features/product_details/presentation/pages/product_details_page.dart';
+import 'package:terra_app/core/utils/app_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
-      home: ProductDetailsPage(),
     );
   }
 }

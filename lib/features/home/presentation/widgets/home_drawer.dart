@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeDrawer extends StatefulWidget {
   const HomeDrawer({super.key});
 
   @override
-  _HomeDrawerState createState() => _HomeDrawerState();
+  HomeDrawerState createState() => HomeDrawerState();
 }
 
-class _HomeDrawerState extends State<HomeDrawer> {
+class HomeDrawerState extends State<HomeDrawer> {
   int _selectedIndex = 0;
 
   @override
@@ -27,6 +28,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   ? null
                   : Icon(Icons.arrow_forward_ios, color: Color(0xFFD36C5B)),
               onTap: () {
+                GoRouter.of(context).pop();
                 setState(() {
                   _selectedIndex = 0;
                 });

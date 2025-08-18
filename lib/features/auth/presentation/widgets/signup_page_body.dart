@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:terra_app/core/utils/app_router.dart';
 import 'package:terra_app/features/auth/presentation/widgets/custom_text_field.dart';
 
 class SignupPageBody extends StatelessWidget {
@@ -36,7 +38,9 @@ class SignupPageBody extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      GoRouter.of(context).push(AppRouter.kHomePage);
+                    },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(200, 60),
                       shape: BeveledRectangleBorder(),
