@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:terra_app/core/utils/app_router.dart';
-import 'package:terra_app/features/auth/presentation/pages/signup_page.dart';
 import 'package:terra_app/features/auth/presentation/widgets/custom_text_field.dart';
-import 'package:terra_app/features/home/presentation/pages/home_page.dart';
 
 class LoginPageBody extends StatelessWidget {
   const LoginPageBody({super.key});
