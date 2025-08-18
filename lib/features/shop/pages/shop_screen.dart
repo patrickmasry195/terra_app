@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../widget/custom_card_item.dart';
 
 class ShopScreen extends StatefulWidget {
@@ -83,6 +82,74 @@ class _ShopScreenState extends State<ShopScreen> {
     );
   }
 
+  Widget _buildPagination(int totalPages) {
+    List<Widget> pages = [];
+
+    if (currentPage > 1) {
+      pages.add(
+        InkWell(
+          onTap: () {
+            setState(() {
+              currentPage--;
+            });
+          },
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text("<", style: TextStyle(fontSize: 18)),
+          ),
+        ),
+      );
+    }
+
+    for (int i = 1; i <= totalPages; i++) {
+      pages.add(
+        InkWell(
+          onTap: () {
+            setState(() {
+              currentPage = i;
+            });
+          },
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: i == currentPage
+                  ? Color(0xffd16147).withOpacity(0.8)
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(color: Color(0xffd16147).withOpacity(0.8)),
+            ),
+            child: Text(
+              "$i",
+              style: TextStyle(
+                color: i == currentPage ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (currentPage < totalPages) {
+      pages.add(
+        InkWell(
+          onTap: () {
+            setState(() {
+              currentPage++;
+            });
+          },
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(">", style: TextStyle(fontSize: 18)),
+          ),
+        ),
+      );
+    }
+
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: pages);
+  }
+
   @override
   Widget build(BuildContext context) {
     final startIndex = (currentPage - 1) * itemsPerPage;
@@ -90,6 +157,8 @@ class _ShopScreenState extends State<ShopScreen> {
         ? products.length
         : (startIndex + itemsPerPage);
     final currentItems = products.sublist(startIndex, endIndex);
+
+    final totalPages = (products.length / itemsPerPage).ceil();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -135,35 +204,7 @@ class _ShopScreenState extends State<ShopScreen> {
                 },
               ),
               SizedBox(height: 20),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: currentPage > 1
-                        ? () {
-                            setState(() {
-                              currentPage--;
-                            });
-                          }
-                        : null,
-                    child: Text("Previous"),
-                  ),
-                  SizedBox(width: 20),
-                  Text("Page $currentPage"),
-                  SizedBox(width: 20),
-                  ElevatedButton(
-                    onPressed: endIndex < products.length
-                        ? () {
-                            setState(() {
-                              currentPage++;
-                            });
-                          }
-                        : null,
-                    child: Text("Next"),
-                  ),
-                ],
-              ),
+              _buildPagination(totalPages), 
             ],
           ),
         ),
