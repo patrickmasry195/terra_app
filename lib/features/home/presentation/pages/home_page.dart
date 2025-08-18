@@ -9,8 +9,6 @@ import 'package:terra_app/features/home/presentation/widgets/search_data.dart';
 import 'package:terra_app/features/home/presentation/widgets/shop_by_category.dart';
 import 'package:terra_app/features/home/presentation/widgets/shop_here.dart';
 import 'package:terra_app/features/home/presentation/widgets/shop_our_best_seller.dart';
-import 'package:terra_app/features/product_details/presentation/pages/product_details_page.dart';
-
 import '../../data/models/product_model.dart';
 
 class HomePage extends StatefulWidget {
