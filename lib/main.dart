@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terra_app/features/auth/presentation/pages/login_page.dart';
+import 'package:terra_app/features/product_details/presentation/pages/product_details_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: ProductDetailsPage(),
     );
   }
 }
