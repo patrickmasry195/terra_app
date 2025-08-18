@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:terra_app/features/auth/presentation/pages/signup_page.dart';
 import 'package:terra_app/features/auth/presentation/widgets/custom_text_field.dart';
+import 'package:terra_app/features/home/presentation/pages/home_page.dart';
 
 class LoginPageBody extends StatelessWidget {
   const LoginPageBody({super.key});
@@ -31,7 +32,12 @@ class LoginPageBody extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(200, 60),
                 shape: BeveledRectangleBorder(),
