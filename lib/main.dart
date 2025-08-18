@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:terra_app/core/theme/app_theme.dart';
 import 'package:terra_app/core/utils/app_router.dart';
 
 void main() {
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme: AppTheme.theme,
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
     );

@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:terra_app/features/auth/presentation/pages/forget_password_page.dart';
 import 'package:terra_app/features/auth/presentation/pages/login_page.dart';
 import 'package:terra_app/features/auth/presentation/pages/signup_page.dart';
 import 'package:terra_app/features/home/presentation/pages/home_page.dart';
@@ -10,6 +11,7 @@ abstract class AppRouter {
   static const kHomePage = '/home_page';
   static const kProductDetailSPage = '/product_details_page';
   static const kShopPage = '/shop_page';
+  static const kForgetPassPage = '/forget_pass_page';
 
   static final router = GoRouter(
     routes: [
@@ -21,6 +23,10 @@ abstract class AppRouter {
         builder: (context, state) => ProductDetailsPage(),
       ),
       GoRoute(path: kShopPage, builder: (context, state) => ShopScreen()),
+      GoRoute(
+        path: kForgetPassPage,
+        builder: (context, state) => ForgetPasswordPage(),
+      ),
     ],
   );
 }

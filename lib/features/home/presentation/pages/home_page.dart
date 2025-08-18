@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:terra_app/core/utils/app_router.dart';
 import 'package:terra_app/features/home/data/datasource/local_data_source.dart';
 import 'package:terra_app/features/home/presentation/widgets/cover_section.dart';
 import 'package:terra_app/features/home/presentation/widgets/home_drawer.dart';
@@ -50,12 +52,7 @@ class _HomePageState extends State<HomePage> {
                   CoverSection(),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductDetailsPage(),
-                        ),
-                      );
+                      GoRouter.of(context).push(AppRouter.kProductDetailSPage);
                     },
                     child: ItalianCharmBracelets(),
                   ),

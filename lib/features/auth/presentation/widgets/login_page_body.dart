@@ -25,7 +25,9 @@ class LoginPageBody extends StatelessWidget {
               keyboardType: TextInputType.visiblePassword,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                GoRouter.of(context).push(AppRouter.kForgetPassPage);
+              },
               child: Text(
                 "Forgot your password?",
                 style: TextStyle(decoration: TextDecoration.underline),
