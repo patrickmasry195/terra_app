@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 
 class CustomCardItem extends StatelessWidget {
+  final String imageUrl;
   final String title;
-  const CustomCardItem({super.key, required this.title});
+  final String price;
+  const CustomCardItem({super.key, required this.title, required this.imageUrl, required this.price});
 
   @override
   Widget build(BuildContext context) {
