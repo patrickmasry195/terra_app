@@ -117,6 +117,7 @@ class _ProductDetailsPageBodyState extends State<ProductDetailsPageBody> {
                   ),
                   const SizedBox(height: 15),
                   CustomButton(
+                    borderColor: Colors.black,
                     text: "Add to cart",
                     onPressed: () {},
                     color: Colors.white,
@@ -125,6 +126,7 @@ class _ProductDetailsPageBodyState extends State<ProductDetailsPageBody> {
                   ),
                   const SizedBox(height: 15),
                   CustomButton(
+                    borderColor: Color(0xffd16147),
                     text: "Buy it now",
                     onPressed: () {},
                     color: const Color(0xffd16147),

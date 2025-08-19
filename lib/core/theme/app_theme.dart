@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData theme = ThemeData(
     fontFamily: 'JosefinSans',
-
     textTheme: const TextTheme(
       displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
       displayMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
