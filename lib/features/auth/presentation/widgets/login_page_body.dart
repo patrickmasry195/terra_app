@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:terra_app/features/auth/presentation/pages/signup_page.dart';
+import 'package:go_router/go_router.dart';
+import 'package:terra_app/core/utils/app_router.dart';
 import 'package:terra_app/features/auth/presentation/widgets/custom_text_field.dart';
-import 'package:terra_app/features/home/presentation/pages/home_page.dart';
 
 class LoginPageBody extends StatelessWidget {
   const LoginPageBody({super.key});
@@ -25,7 +25,9 @@ class LoginPageBody extends StatelessWidget {
               keyboardType: TextInputType.visiblePassword,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                GoRouter.of(context).push(AppRouter.kForgetPassPage);
+              },
               child: Text(
                 "Forgot your password?",
                 style: TextStyle(decoration: TextDecoration.underline),
@@ -33,10 +35,7 @@ class LoginPageBody extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
+                GoRouter.of(context).push(AppRouter.kHomePage);
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(200, 60),
@@ -50,10 +49,7 @@ class LoginPageBody extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignupPage()),
-                );
+                GoRouter.of(context).push(AppRouter.kSignUpPage);
               },
               child: Text(
                 "Create account",
