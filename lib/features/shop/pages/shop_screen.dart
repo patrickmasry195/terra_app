@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:terra_app/core/widgets/custom_appbar.dart';
+import 'package:terra_app/core/widgets/custom_drawer.dart';
+import 'package:terra_app/features/home/data/datasource/local_data_source.dart';
+import 'package:terra_app/features/home/data/models/product_model.dart';
 import '../widget/custom_card_item.dart';
 
 class ShopScreen extends StatefulWidget {
-  const ShopScreen({super.key});
-
+  const ShopScreen({super.key, required this.category});
+  final String category;
   @override
   State<ShopScreen> createState() => _ShopScreenState();
 }
@@ -83,6 +86,22 @@ class _ShopScreenState extends State<ShopScreen> {
     );
   }
 
+  bool _isSearching = false;
+  final TextEditingController _searchController = TextEditingController();
+  List<Product> _searchResults = [];
+
+  void _performSearch(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        _searchResults = [];
+      } else {
+        _searchResults = allProducts.where((product) {
+          return product.name.toLowerCase().contains(query.toLowerCase());
+        }).toList();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final startIndex = (currentPage - 1) * itemsPerPage;
@@ -92,79 +111,101 @@ class _ShopScreenState extends State<ShopScreen> {
     final currentItems = products.sublist(startIndex, endIndex);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(30.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Necklaces",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Image.asset("assets/images/filter.png", height: 20),
-                  SizedBox(width: 8),
-                  Text("Filter", style: TextStyle(fontSize: 16)),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: _buildDropdown("Availability", availabilityList),
-                  ),
-                  SizedBox(width: 8),
-                  Expanded(child: _buildDropdown("Price", priceList)),
-                  SizedBox(width: 8),
-                  Expanded(child: _buildDropdown("Sort by", sortByList)),
-                ],
-              ),
-              SizedBox(height: 20),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.75,
+      appBar: _isSearching
+          ? TerraSearchAppBar(
+              searchController: _searchController,
+              onChanged: _performSearch,
+              onClose: () {
+                setState(() {
+                  _isSearching = false;
+                  _searchController.clear();
+                  _searchResults = [];
+                });
+              },
+            )
+          : TerraNormalAppBar(
+              onSearchTap: () {
+                setState(() {
+                  _isSearching = true;
+                });
+              },
+            ),
+      drawer: CustomDrawer(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.category,
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                itemCount: currentItems.length,
-                itemBuilder: (context, index) {
-                  return CustomCardItem(title: currentItems[index]);
-                },
-              ),
-              SizedBox(height: 20),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset("assets/images/filter.png", height: 20),
+                    SizedBox(width: 8),
+                    Text("Filter", style: TextStyle(fontSize: 16)),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: _buildDropdown("Availability", availabilityList),
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(child: _buildDropdown("Price", priceList)),
+                    SizedBox(width: 8),
+                    Expanded(child: _buildDropdown("Sort by", sortByList)),
+                  ],
+                ),
+                SizedBox(height: 20),
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.75,
+                  ),
+                  itemCount: currentItems.length,
+                  itemBuilder: (context, index) {
+                    return CustomCardItem(title: currentItems[index]);
+                  },
+                ),
+                SizedBox(height: 20),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: currentPage > 1
-                        ? () {
-                            setState(() {
-                              currentPage--;
-                            });
-                          }
-                        : null,
-                    child: Text("Previous"),
-                  ),
-                  SizedBox(width: 20),
-                  Text("Page $currentPage"),
-                  SizedBox(width: 20),
-                  ElevatedButton(
-                    onPressed: endIndex < products.length
-                        ? () {
-                            setState(() {
-                              currentPage++;
-                            });
-                          }
-                        : null,
-                    child: Text("Next"),
-                  ),
-                ],
-              ),
-            ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: currentPage > 1
+                          ? () {
+                              setState(() {
+                                currentPage--;
+                              });
+                            }
+                          : null,
+                      icon: Icon(Icons.arrow_back_ios),
+                    ),
+                    SizedBox(width: 20),
+                    Text("$currentPage", style: TextStyle(fontSize: 20)),
+                    SizedBox(width: 20),
+                    IconButton(
+                      onPressed: endIndex < products.length
+                          ? () {
+                              setState(() {
+                                currentPage++;
+                              });
+                            }
+                          : null,
+                      icon: Icon(Icons.arrow_forward_ios),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

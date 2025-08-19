@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:terra_app/features/auth/presentation/pages/forget_password_page.dart';
 import 'package:terra_app/features/auth/presentation/pages/login_page.dart';
 import 'package:terra_app/features/auth/presentation/pages/signup_page.dart';
+import 'package:terra_app/features/cart/presentation/screens/cart_screen.dart';
 import 'package:terra_app/features/home/presentation/pages/home_page.dart';
 import 'package:terra_app/features/product_details/presentation/pages/product_details_page.dart';
 import 'package:terra_app/features/shop/pages/shop_screen.dart';
@@ -10,8 +11,9 @@ abstract class AppRouter {
   static const kSignUpPage = '/signup_page';
   static const kHomePage = '/home_page';
   static const kProductDetailSPage = '/product_details_page';
-  static const kShopPage = '/shop_page';
+  static const kShopPage = '/shop_page/:category';
   static const kForgetPassPage = '/forget_pass_page';
+  static const kCartPage = "/cart_page";
 
   static final router = GoRouter(
     routes: [
@@ -22,11 +24,20 @@ abstract class AppRouter {
         path: kProductDetailSPage,
         builder: (context, state) => ProductDetailsPage(),
       ),
-      GoRoute(path: kShopPage, builder: (context, state) => ShopScreen()),
+      GoRoute(
+        path: kShopPage,
+        builder: (context, state) {
+          final category = Uri.decodeComponent(
+            state.pathParameters['category']!,
+          );
+          return ShopScreen(category: category);
+        },
+      ),
       GoRoute(
         path: kForgetPassPage,
         builder: (context, state) => ForgetPasswordPage(),
       ),
+      GoRoute(path: kCartPage, builder: (context, state) => CartScreen()),
     ],
   );
 }

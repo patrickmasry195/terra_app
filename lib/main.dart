@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:terra_app/core/injections.dart';
 import 'package:terra_app/core/theme/app_theme.dart';
 import 'package:terra_app/core/utils/app_router.dart';
+import 'package:terra_app/features/cart/presentation/cubits/cart_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await getInit();
   runApp(const MyApp());
 }
 
@@ -11,10 +16,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: AppTheme.theme,
-      routerConfig: AppRouter.router,
-      debugShowCheckedModeBanner: false,
+    return MultiBlocProvider(
+      providers: [BlocProvider<CartCubit>(create: (_) => sl<CartCubit>())],
+      child: MaterialApp.router(
+        theme: AppTheme.theme,
+        routerConfig: AppRouter.router,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
