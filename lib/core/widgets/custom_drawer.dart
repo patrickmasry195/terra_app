@@ -127,7 +127,9 @@ class CustomDrawerState extends State<CustomDrawer> {
               'Log in',
               style: TextStyle(fontSize: 16, color: Color(0xFFD36C5B)),
             ),
-            onTap: () {},
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kUserProfile);
+            },
           ),
         ],
       ),
@@ -167,7 +169,10 @@ class CustomDrawerState extends State<CustomDrawer> {
               category,
               style: const TextStyle(color: Color(0xFFD36C5B), fontSize: 16),
             ),
-            onTap: () {},
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kBraceletCarousel);
+              Navigator.pop(context);
+            },
           );
         },
       ),
