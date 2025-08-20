@@ -1,5 +1,5 @@
 
-🛍️ Accessories E-Commerce App
+🛍️ Accessories E-Commerce App                 demo : https://drive.google.com/file/d/1iBg3L_MeqO-cAgDNwOqrbvemFz5Saojz/view?usp=drive_link
 
 A simple yet powerful Flutter E-Commerce App built with Cubit (Bloc) for state management.
 This app provides an elegant shopping experience with product browsing, authentication, cart management, product details, and even accessories customization (necklace editor).
