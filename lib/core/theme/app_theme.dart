@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static ThemeData theme = ThemeData(
+    bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.transparent),
+
     fontFamily: 'JosefinSans',
     textTheme: const TextTheme(
       displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
