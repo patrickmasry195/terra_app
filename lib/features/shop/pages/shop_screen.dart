@@ -36,11 +36,13 @@ class ShopScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                     FilterRow(cubit: cubit),
                     const SizedBox(height: 20),
-                    productGridView(currentItems: currentItems,),
+                    productGridView(currentItems: currentItems),
                     const SizedBox(height: 20),
-                    Pagination(
-                      totalPages: cubit.totalPages,
-                      currentPage: cubit.currentPage,
+                    SafeArea(
+                      child: Pagination(
+                        totalPages: cubit.totalPages,
+                        currentPage: cubit.currentPage,
+                      ),
                     ),
                   ],
                 ),
@@ -52,4 +54,3 @@ class ShopScreen extends StatelessWidget {
     );
   }
 }
-
