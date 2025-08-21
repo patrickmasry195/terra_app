@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,10 +25,10 @@ class DropdownWidget extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: title == "Sort by" ? 18 : 16),
+              style: TextStyle(fontSize: title == "Sort by" ? 17 : 15),
             ),
             InkWell(
-              child: Image.asset("assets/images/down-arrow.png", height: 20),
+              child: Image.asset("assets/images/down-arrow.png", height: 17),
               onTap: () => cubit.toggleDropdown(title),
             ),
           ],
@@ -68,4 +66,3 @@ class DropdownWidget extends StatelessWidget {
     );
   }
 }
-
